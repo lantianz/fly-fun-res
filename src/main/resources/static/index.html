@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+<h1>404<span style="font-size: 18px; color: #666666; margin-left: 30px">fly-fun-res page</span></h1>
+<video id="video" style="height: 500px" controls></video>
+<script>
+    var video = document.getElementById('video');
+    var videoSrc = 'https://media-oss.plasticmemory.net/m3u8/1706947830874.m3u8'; // M3U8文件的URL
+
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+        });
+    }
+</script>
+</body>
+</html>
