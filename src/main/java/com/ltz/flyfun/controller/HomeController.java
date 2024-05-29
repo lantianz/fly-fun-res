@@ -26,6 +26,7 @@ public class HomeController {
             @Override
             public void success(List<MainDataBean> mainDataBeans) {
                 try {
+                    res.clear();
                     res.put("mainDataBeans", mainDataBeans);
                 } finally {
                     latch.countDown();
@@ -35,6 +36,7 @@ public class HomeController {
             @Override
             public void onFailure(String msg) {
                 try {
+                    res.clear();
                     res.put("msg", msg);
                 } finally {
                     latch.countDown();

@@ -14,6 +14,12 @@ import java.io.IOException;
  * 弹幕
  */
 public class DanmuModel extends BaseModel {
+    public int getParamsSize() {
+        return parserInterface.setClassificationParamsSize();
+    }
+    public int getStartPageNum() {
+        return parserInterface.startPageNum();
+    }
     public void getDanmu(DanmuCallback.DataCallback callback, String... params) {
         String url = parserInterface.getDanmuUrl(params);
         if (Utils.isNullOrEmpty(url)) {

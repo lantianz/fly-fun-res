@@ -18,6 +18,12 @@ import java.io.UnsupportedEncodingException;
  * @date 2023/12/31 21:46
  */
 public class SearchModel extends BaseModel {
+    public int getParamsSize() {
+        return parserInterface.setClassificationParamsSize();
+    }
+    public int getStartPageNum() {
+        return parserInterface.startPageNum();
+    }
     public void getData(boolean firstTimeData, SearchCallback.DataCallback callback, String... param) throws UnsupportedEncodingException {
         String url = parserInterface.getSearchUrl(param);
         if (parserInterface.getPostMethodClassName().contains(this.getClass().getName())) {

@@ -155,13 +155,13 @@ public class AnFunsImpl implements ParserInterface {
         Document document = Jsoup.parse(source);
         Elements pageContent = document.select(".hl-page-total");
         if (pageContent.size() > 0) {
-            String regex = "/\\s*(\\d+)页";
+            String regex = "(\\d+)(\\页)";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(pageContent.text());
             if (matcher.find()) {
                 String extractedNumber = matcher.group(1);
                 LogUtil.logInfo("总页码", extractedNumber);
-                return Integer.valueOf(extractedNumber);
+                return Integer.parseInt(extractedNumber);
             } else {
                 return startPageNum();
             }
@@ -861,14 +861,14 @@ public class AnFunsImpl implements ParserInterface {
     @AllArgsConstructor
     public enum ClassificationEnum {
         // /show/3-搞笑-B-2024/area/日本/by/hits/lang/日语/page/1.html
-        ID("%s-%s-%s-%s"), // type 值
-        TYPE("%s"), // 类型
-        LETTER("%s"), // 字母
-        YEAR("%s"), // 年份
-        AREA("/area/%s"), // 地区
-        BY("/by/%s"), // 排序
-        LANG("/lang/%s"), // 语言
-        PAGE("/page/%s"); // 分页
+        ID("%s-%s-%s-%s"), // type 3
+        TYPE("%s"), // 类型   搞笑
+        LETTER("%s"), // 字母 B
+        YEAR("%s"), // 年份   2024
+        AREA("/area/%s"), // 地区 日本
+        BY("/by/%s"), // 排序 hits
+        LANG("/lang/%s"), // 语言 日语
+        PAGE("/page/%s"); // 分页 1.html
 
         private String content;
     }

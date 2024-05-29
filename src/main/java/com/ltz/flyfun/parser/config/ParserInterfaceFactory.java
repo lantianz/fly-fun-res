@@ -13,7 +13,7 @@ import com.ltz.flyfun.parser.parserService.ParserInterface;
  */
 public class ParserInterfaceFactory {
     // 当前使用的默认的源
-    public static final int USER_SOURSE = 2;
+    public static final int USER_SOURSE = 3;
     // 拖布影视
     public static final int SOURCE_TBYS = 0;
     // 嘶哩嘶哩

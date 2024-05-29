@@ -2,6 +2,7 @@ package com.ltz.flyfun.model;
 
 import com.ltz.flyfun.contract.ClassificationVodListCallback;
 import com.ltz.flyfun.net.OkHttpUtils;
+import com.ltz.flyfun.parser.LogUtil;
 import com.ltz.flyfun.parser.bean.ClassificationDataBean;
 import com.ltz.flyfun.parser.bean.VodDataBean;
 import com.ltz.flyfun.utils.Utils;
@@ -20,6 +21,12 @@ import java.util.List;
  * @date 2023/12/31 21:46
  */
 public class ClassificationVodListModel extends BaseModel {
+    public int getParamsSize() {
+        return parserInterface.setClassificationParamsSize();
+    }
+    public int getStartPageNum() {
+        return parserInterface.startPageNum();
+    }
     public void getData(boolean firstTimeData, ClassificationVodListCallback.DataCallback callback, String... param) throws UnsupportedEncodingException {
         String url = parserInterface.getClassificationUrl(param);
         if (parserInterface.getPostMethodClassName().contains(this.getClass().getName())) {
@@ -36,6 +43,7 @@ public class ClassificationVodListModel extends BaseModel {
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
                         String source = getBody(response);
+                        LogUtil.logInfo("source:" , source);
                         VodDataBean vodDataBean = parserInterface.parserClassificationVodList(source);
                         int pageCount = firstTimeData ? parserInterface.parserPageCount(source) : parserInterface.startPageNum();
                         if (Utils.isNullOrEmpty(vodDataBean))

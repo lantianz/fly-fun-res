@@ -48,7 +48,7 @@ public class WeekDataBean implements Serializable {
         /**
          * 剧集图片
          */
-        private String imgUrl;
+        private String img;
         /**
          * 剧集访问地址
          */
