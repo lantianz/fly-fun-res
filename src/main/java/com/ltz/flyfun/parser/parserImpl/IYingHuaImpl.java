@@ -360,6 +360,11 @@ public class IYingHuaImpl implements ParserInterface {
         return null;
     }
 
+    @Override
+    public List<DetailsDataBean.Dramas> parserSourcesDramas(String source, int listSource, String dramaStr) {
+        return null;
+    }
+
     /**
      * 设置分类组是否为多选联动
      *

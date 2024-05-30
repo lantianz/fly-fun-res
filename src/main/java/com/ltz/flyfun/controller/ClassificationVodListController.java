@@ -26,7 +26,7 @@ public class ClassificationVodListController {
         CountDownLatch latch = new CountDownLatch(1);
         CountDownLatch latch2 = new CountDownLatch(1);
 
-        boolean firstTimeData = false;  //初始化加载页面时true
+        boolean firstTimeData = true;  //初始化加载页面时true
         String[] params = new String[classificationVodListModel.getParamsSize()];
         // 筛选页面参数
         /*
@@ -49,7 +49,6 @@ public class ClassificationVodListController {
             @Override
             public void successClassList(List<ClassificationDataBean> classificationDataBeans) {
                 try {
-                    res.clear();
                     res.put("classificationDataBeans", classificationDataBeans);
                 } finally {
                     latch.countDown();
@@ -59,7 +58,6 @@ public class ClassificationVodListController {
             @Override
             public void errorClassList(String msg) {
                 try {
-                    res.clear();
                     res.put("msg", msg);
                 } finally {
                     latch.countDown();

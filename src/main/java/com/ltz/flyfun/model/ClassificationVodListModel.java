@@ -2,7 +2,6 @@ package com.ltz.flyfun.model;
 
 import com.ltz.flyfun.contract.ClassificationVodListCallback;
 import com.ltz.flyfun.net.OkHttpUtils;
-import com.ltz.flyfun.parser.LogUtil;
 import com.ltz.flyfun.parser.bean.ClassificationDataBean;
 import com.ltz.flyfun.parser.bean.VodDataBean;
 import com.ltz.flyfun.utils.Utils;
@@ -43,7 +42,6 @@ public class ClassificationVodListModel extends BaseModel {
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
                         String source = getBody(response);
-                        LogUtil.logInfo("source:" , source);
                         VodDataBean vodDataBean = parserInterface.parserClassificationVodList(source);
                         int pageCount = firstTimeData ? parserInterface.parserPageCount(source) : parserInterface.startPageNum();
                         if (Utils.isNullOrEmpty(vodDataBean))

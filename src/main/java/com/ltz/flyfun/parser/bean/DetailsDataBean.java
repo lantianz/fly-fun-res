@@ -57,8 +57,24 @@ public class DetailsDataBean implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Dramas implements Serializable {
+        private Info listInfo; // 当前播放的信息
         private String listTitle; // 播放线路标题 例如：A播放列表、B播放列表
+        private boolean isSelected; // 是否选中
         private List<DramasItem> dramasItemList; // 集数列表
+
+        @Override
+        public String toString() {
+            return JSONObject.toJSONString(this);
+        }
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Info implements Serializable {
+        private String title; // 番剧标题
+        private String episode; // 当前播放集数
+        private List<String> tags; // tags
 
         @Override
         public String toString() {

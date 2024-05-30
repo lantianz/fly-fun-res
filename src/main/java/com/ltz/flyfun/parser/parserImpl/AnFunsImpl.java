@@ -27,12 +27,12 @@ import java.util.regex.Pattern;
 import static com.ltz.flyfun.parser.LogUtil.logInfo;
 
 /**
-  * @包名: com.ltz.flyfun.parser.parserImpl
-  * @类名: AnFunsImpl
-  * @描述: AnFuns站点解析实现
-  * @作者: Li Z
-  * @日期: 2024/1/26 13:37
-  * @版本: 1.0
+ * @包名: com.ltz.flyfun.parser.parserImpl
+ * @类名: AnFunsImpl
+ * @描述: AnFuns站点解析实现
+ * @作者: Li Z
+ * @日期: 2024/1/26 13:37
+ * @版本: 1.0
  */
 public class AnFunsImpl implements ParserInterface {
     /**
@@ -231,7 +231,7 @@ public class AnFunsImpl implements ParserInterface {
             Element conchContent = document.getElementById("conch-content");
             Elements listTitle = conchContent.select("div.conch-ctwrap div.container div.hl-row-box div.hl-rb-vod div.hl-rb-head");
             if (listTitle.size() > 0) {
-                for (int i=0,size=listTitle.size(); i<size; i++) {
+                for (int i = 0, size = listTitle.size(); i < size; i++) {
                     if (!listTitle.get(i).parent().hasClass("hl-week-item")) {
                         String title = listTitle.get(i).select("h2.hl-rb-title").text();
                         if (title.contains("排行榜"))
@@ -245,9 +245,8 @@ public class AnFunsImpl implements ParserInterface {
                             mainDataBean.setHasMore(true);
                             if (moreUrl.contains("/map")) {
 //                                mainDataBean.setOpenMoreClass(TextListActivity.class);
-                                mainDataBean.setMore("%s"+moreUrl);
-                            }
-                            else if (moreUrl.contains("/type/")) {
+                                mainDataBean.setMore("%s" + moreUrl);
+                            } else if (moreUrl.contains("/type/")) {
                                 String regex = "([0-9]+)";
                                 Pattern pattern = Pattern.compile(regex);
                                 Matcher matcher = pattern.matcher(moreUrl);
@@ -330,12 +329,12 @@ public class AnFunsImpl implements ParserInterface {
                 Elements playTitleList = playElement.select(".hl-plays-wrap a");
                 Elements playList = playElement.select(".hl-tabs-box");
                 List<DetailsDataBean.Dramas> dramasList = new ArrayList<>();
-                for (int i=0,size=playTitleList.size(); i<size; i++) {
+                for (int i = 0, size = playTitleList.size(); i < size; i++) {
                     DetailsDataBean.Dramas dramas = new DetailsDataBean.Dramas();
                     String playListName = playTitleList.get(i).attr("alt");
                     dramas.setListTitle(playListName);
                     List<DetailsDataBean.DramasItem> dramasItems = new ArrayList<>();
-                    Elements playAList =playList.get(i).select("a");
+                    Elements playAList = playList.get(i).select("a");
                     int index = 0;
                     for (Element drama : playAList) {
                         if (drama.select("a").select("i").size() > 0)
@@ -393,7 +392,7 @@ public class AnFunsImpl implements ParserInterface {
             if (playTitleList.size() > 0) {
                 // 解析播放列表
                 Elements playing = null;
-                for (int i=0,size=playTitleList.size(); i<size; i++) {
+                for (int i = 0, size = playTitleList.size(); i < size; i++) {
                     Elements playAList = playList.get(i).select("a");
                     for (Element drama : playAList) {
                         String watchUrl = drama.select("a").attr("href");
@@ -421,6 +420,67 @@ public class AnFunsImpl implements ParserInterface {
         } catch (Exception e) {
             e.printStackTrace();
             logInfo("parserNowSourcesDramas error", e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<DetailsDataBean.Dramas> parserSourcesDramas(String source, int listSource, String dramaStr) {
+        try {
+            Document document = Jsoup.parse(source);
+            Element detailElement = document.getElementById("conch-content");
+            // 获取当前播放信息
+            Element playing = detailElement.getElementById("playerinfo");
+            String playingTitle = playing.attr("title");
+            String playingEpisode = detailElement.select(".hl-infos-title em").text();
+            Elements playingTags = detailElement.select(".hl-tag-item a");
+            // 获取所有播放列表
+            Element playElement = detailElement.getElementById("playlist");
+            Elements playTitleList = playElement.select(".hl-plays-wrap a");
+            Elements playList = playElement.select(".hl-tabs-box");
+            List<DetailsDataBean.Dramas> dramasList = new ArrayList<>();
+            if (playTitleList.size() > 0) {
+                // 解析播放列表
+                for (int i = 0, size = playTitleList.size(); i < size; i++) {
+                    DetailsDataBean.Dramas dramas = new DetailsDataBean.Dramas();
+                    DetailsDataBean.Info info = new DetailsDataBean.Info();
+                    info.setTitle(playingTitle);
+                    info.setEpisode(playingEpisode);
+                    List<String> tags = new ArrayList<>();
+                    for (Element element : playingTags) {
+                        tags.add(element.text());
+                    }
+                    info.setTags(tags);
+                    dramas.setListInfo(info);
+                    String playListName = playTitleList.get(i).attr("alt");
+                    dramas.setListTitle(playListName);
+                    dramas.setSelected(false);
+                    Elements playAList = playList.get(i).select("a");
+                    List<DetailsDataBean.DramasItem> dramasItemList = new ArrayList<>();
+                    int index = 0;
+                    for (Element element : playAList) {
+                        String watchUrl = element.select("a").attr("href");
+                        // 因为dramaStr第一个一定是最后播放的地址，根据这个地址判断上次播放是那个源！
+                        if (dramaStr.startsWith(watchUrl)) {
+                            dramas.setSelected(true);
+                        }
+                        if (element.select("a").select("i").size() > 0)
+                            continue;
+                        index += 1;
+                        String dramaTitle = element.text();
+                        String dramaUrl = element.select("a").attr("href");
+                        dramasItemList.add(new DetailsDataBean.DramasItem(index, dramaTitle, dramaUrl, false));
+                    }
+                    dramas.setDramasItemList(dramasItemList);
+                    dramasList.add(dramas);
+
+                }
+            }
+            logInfo("播放现实的播放源", dramasList.toString());
+            return dramasList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logInfo("parserSourcesDramas error", e.getMessage());
         }
         return null;
     }
@@ -495,15 +555,17 @@ public class AnFunsImpl implements ParserInterface {
             VodDataBean vodDataBean = new VodDataBean();
             List<VodDataBean.Item> items = new ArrayList<>();
             Document document = Jsoup.parse(source);
-            Elements elements = document.select(".hl-list-item a.hl-lazy");
+            Elements elements = document.select(".hl-list-item");
             if (elements.size() > 0) {
                 for (Element item : elements) {
                     VodDataBean.Item bean = new VodDataBean.Item();
-                    bean.setTitle(item.attr("title"));
-                    bean.setUrl(item.attr("href"));
-                    bean.setImg(item.attr("data-original"));
-                    bean.setTopLeftTag(item.select("span.state").text());
-                    bean.setEpisodesTag(item.select("span.remarks").text());
+                    Elements temp = item.select("a.hl-lazy");
+                    bean.setTitle(temp.attr("title"));
+                    bean.setUrl(temp.attr("href"));
+                    bean.setImg(temp.attr("data-original"));
+                    bean.setTopLeftTag(temp.select("span.state").text());
+                    bean.setEpisodesTag(temp.select("span.remarks").text());
+                    bean.setIntroduce(item.select(".hl-item-content p.hl-lc-2").text());
                     items.add(bean);
                 }
                 vodDataBean.setItemList(items);
@@ -711,7 +773,7 @@ public class AnFunsImpl implements ParserInterface {
             Document document = Jsoup.parse(source);
             Elements weekElements = document.select(".hl-vod-list.hl-fadeIn.swiper-wrapper");
             if (weekElements.size() > 0) {
-                for (int i = 0, size = WeekEnum.values().length; i<size; i++) {
+                for (int i = 0, size = WeekEnum.values().length; i < size; i++) {
                     Elements aList = weekElements.get(i).select("li a.hl-lazy");
                     int week = WeekEnum.values()[i].getIndex();
                     List<WeekDataBean.WeekItem> weekItems = new ArrayList<>();
@@ -823,6 +885,7 @@ public class AnFunsImpl implements ParserInterface {
 
     /**
      * unicode转中文
+     *
      * @param string
      * @return
      */
@@ -875,6 +938,7 @@ public class AnFunsImpl implements ParserInterface {
 
     /**
      * 拼接分类url参数
+     *
      * @param id
      * @param type
      * @param letter

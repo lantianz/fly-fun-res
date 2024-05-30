@@ -128,7 +128,7 @@ public interface ParserInterface {
      * @return {@link DetailsDataBean.DramasItem}
      */
     List<DetailsDataBean.DramasItem> parserNowSourcesDramas(String source, int listSource, String dramaStr);
-
+    List<DetailsDataBean.Dramas> parserSourcesDramas(String source, int listSource, String dramaStr);
     /**
      * 设置分类组是否为多选联动
      * @return

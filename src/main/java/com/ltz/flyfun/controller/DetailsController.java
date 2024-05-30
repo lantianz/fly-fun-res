@@ -19,14 +19,13 @@ public class DetailsController {
     HashMap res = new HashMap();
 
     @GetMapping("/get")
-    public Result<?> get(@RequestParam("from") String from, @RequestParam("path") String path, @RequestParam("id") String id) {
+    public Result<?> get(@RequestParam("from") String from, @RequestParam("url") String urlAccept) {
         CountDownLatch latch = new CountDownLatch(1);
 
         String url = "";
         // video页面需要
-        System.out.println(from + "+" + path + "+" + id);
         if (from == null || from.equals("")) {
-            url = "/" + path + "/" + id;
+            url = urlAccept;
         } else {
             url = from;
         }
