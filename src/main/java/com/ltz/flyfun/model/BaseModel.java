@@ -11,9 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
  * @date 2023/12/30 22:31
  */
 public class BaseModel {

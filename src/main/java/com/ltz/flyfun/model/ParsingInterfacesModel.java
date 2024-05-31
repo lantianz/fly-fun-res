@@ -18,9 +18,7 @@ import java.security.MessageDigest;
 import java.util.Base64;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2024/2/21 8:37
  */
 public class ParsingInterfacesModel extends BaseModel {

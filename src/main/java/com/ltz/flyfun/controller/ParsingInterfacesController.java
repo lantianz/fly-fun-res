@@ -20,7 +20,7 @@ public class ParsingInterfacesController {
     public Result<?> get() {
         CountDownLatch latch = new CountDownLatch(1);
 
-        String url = "";    // 暂时不知道干嘛的
+        String url = "/";
 
         parsingInterfacesModel.parser(url, new ParsingInterfacesCallback.DataCallback() {
 

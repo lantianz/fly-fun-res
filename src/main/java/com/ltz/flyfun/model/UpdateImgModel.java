@@ -11,9 +11,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2024/2/17 20:33
  */
 public class UpdateImgModel extends BaseModel {

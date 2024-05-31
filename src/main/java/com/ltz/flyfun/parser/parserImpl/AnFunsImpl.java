@@ -24,8 +24,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.ltz.flyfun.parser.LogUtil.logInfo;
-
 /**
  * @包名: com.ltz.flyfun.parser.parserImpl
  * @类名: AnFunsImpl
@@ -272,11 +270,11 @@ public class AnFunsImpl implements ParserInterface {
                     }
                 }
             }
-            logInfo("首页内容", mainDataBeans.toString());
+            // logInfo("首页内容", mainDataBeans.toString());
             return mainDataBeans;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserMainData error", e.getMessage());
+            // logInfo("parserMainData error", e.getMessage());
         }
         return null;
     }
@@ -362,11 +360,11 @@ public class AnFunsImpl implements ParserInterface {
                     detailsDataBean.setRecommendList(recommendList);
                 }
             }
-            logInfo("详情信息", detailsDataBean.toString());
+            // logInfo("详情信息", detailsDataBean.toString());
             return detailsDataBean;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserDetails error", e.getMessage());
+            // logInfo("parserDetails error", e.getMessage());
         }
         return null;
     }
@@ -415,11 +413,11 @@ public class AnFunsImpl implements ParserInterface {
                     }
                 }
             }
-            logInfo("播放列表信息", dramasItemList.toString());
+            // logInfo("播放列表信息", dramasItemList.toString());
             return dramasItemList;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserNowSourcesDramas error", e.getMessage());
+            // logInfo("parserNowSourcesDramas error", e.getMessage());
         }
         return null;
     }
@@ -476,11 +474,11 @@ public class AnFunsImpl implements ParserInterface {
 
                 }
             }
-            logInfo("播放现实的播放源", dramasList.toString());
+            // logInfo("播放现实的播放源", dramasList.toString());
             return dramasList;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserSourcesDramas error", e.getMessage());
+            // logInfo("parserSourcesDramas error", e.getMessage());
         }
         return null;
     }
@@ -534,11 +532,11 @@ public class AnFunsImpl implements ParserInterface {
             ClassificationDataBean classificationDataBean = new ClassificationDataBean("排序", false, index, items);
             classificationDataBean.setItemList(items);
             classificationDataBeans.add(classificationDataBean);
-            logInfo("分类列表信息", classificationDataBeans.toString());
+            // logInfo("分类列表信息", classificationDataBeans.toString());
             return classificationDataBeans;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserClassificationList error", e.getMessage());
+            // logInfo("parserClassificationList error", e.getMessage());
         }
         return null;
     }
@@ -569,12 +567,12 @@ public class AnFunsImpl implements ParserInterface {
                     items.add(bean);
                 }
                 vodDataBean.setItemList(items);
-                logInfo("分类列表数据", vodDataBean.toString());
+                // logInfo("分类列表数据", vodDataBean.toString());
             }
             return vodDataBean;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserClassificationVodList error", e.getMessage());
+            // logInfo("parserClassificationVodList error", e.getMessage());
         }
         return null;
     }
@@ -710,26 +708,26 @@ public class AnFunsImpl implements ParserInterface {
             for (Element script : scriptElements) {
                 String html = script.html();
                 if (html.contains("player_aaaa")) {
-                    logInfo("javaScript", html);
+                    // logInfo("javaScript", html);
                     String jsonText = html.substring(html.indexOf("{"), html.lastIndexOf("}") + 1);
                     JSONObject jsonObject = JSON.parseObject(jsonText);
                     String encryptUrl = jsonObject.getString("url");
-                    logInfo("播放地址加密字符串", encryptUrl);
+                    // logInfo("播放地址加密字符串", encryptUrl);
                     switch (jsonObject.getInteger("encrypt")) {
                         case 2:
-                            logInfo("encrypt为2 使用BASE64解码", "");
+                            // logInfo("encrypt为2 使用BASE64解码", "");
                             Base64.Decoder decoder = Base64.getDecoder();
                             String decodedString = new String(decoder.decode(encryptUrl));
-                            logInfo("BASE64解码后", decodedString);
+                            // logInfo("BASE64解码后", decodedString);
                             try {
                                 decodedString = decodedString.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
-                                logInfo("替换特殊字符后", decodedString);
+                                // logInfo("替换特殊字符后", decodedString);
                                 decodedString = URLDecoder.decode(decodedString, StandardCharsets.UTF_8.toString());
-                                logInfo("播放地址URL解码后 - >", decodedString);
+                                // logInfo("播放地址URL解码后 - >", decodedString);
                                 decodedString = decodedString.replaceAll("%", "\\\\");
-                                logInfo("unicode转中文后", decodedString);
+                                // logInfo("unicode转中文后", decodedString);
                                 decodedString = unicodeDecode(decodedString);
-                                logInfo("最终播放地址 - >", decodedString);
+                                // logInfo("最终播放地址 - >", decodedString);
                             } catch (UnsupportedEncodingException e) {
                                 throw new RuntimeException(e);
                             }
@@ -744,7 +742,7 @@ public class AnFunsImpl implements ParserInterface {
             return result;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("getPlayUrl error", e.getMessage());
+            // logInfo("getPlayUrl error", e.getMessage());
         }
         return null;
     }
@@ -788,12 +786,12 @@ public class AnFunsImpl implements ParserInterface {
                     }
                     weekDataBeans.add(new WeekDataBean(week, weekItems));
                 }
-                logInfo("时间表数据", weekDataBeans.toString());
+                // logInfo("时间表数据", weekDataBeans.toString());
             }
             return weekDataBeans;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserWeekDataList error", e.getMessage());
+            // logInfo("parserWeekDataList error", e.getMessage());
         }
         return null;
     }
@@ -873,12 +871,12 @@ public class AnFunsImpl implements ParserInterface {
                     itemList.add(rankItem);
                 }
                 textDataBeans.add(new TextDataBean("", itemList));
-                logInfo("排行榜数据", textDataBeans.toString());
+                // logInfo("排行榜数据", textDataBeans.toString());
             }
             return textDataBeans;
         } catch (Exception e) {
             e.printStackTrace();
-            logInfo("parserTextList error", e.getMessage());
+            // logInfo("parserTextList error", e.getMessage());
         }
         return null;
     }

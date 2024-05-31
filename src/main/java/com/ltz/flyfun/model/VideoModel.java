@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2023/12/31 16:20
  */
 public class VideoModel extends BaseModel {

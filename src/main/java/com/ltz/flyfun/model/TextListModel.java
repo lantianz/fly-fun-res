@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2024/1/24 15:40
  */
 public class TextListModel extends BaseModel {

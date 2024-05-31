@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2024/2/21 16:07
  */
 @Data

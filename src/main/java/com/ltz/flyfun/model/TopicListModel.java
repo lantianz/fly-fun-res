@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2023/12/31 21:46
  */
 public class TopicListModel extends BaseModel {

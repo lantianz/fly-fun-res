@@ -11,9 +11,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2023/12/31 12:07
  */
 public class DetailsModel extends BaseModel {

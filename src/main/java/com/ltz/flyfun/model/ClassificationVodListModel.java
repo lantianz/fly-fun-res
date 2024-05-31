@@ -14,9 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
- * @author Li
- * @version 1.0
- * @description: 注释
+
  * @date 2023/12/31 21:46
  */
 public class ClassificationVodListModel extends BaseModel {
