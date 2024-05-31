@@ -63,7 +63,6 @@ public class MainDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: MainDataBean.Item
       * @描述: 首页banner/视频数据列表通用实体
-      * @作者: Li Z
       * @日期: 2024/1/23 22:12
       * @版本: 1.0
      */

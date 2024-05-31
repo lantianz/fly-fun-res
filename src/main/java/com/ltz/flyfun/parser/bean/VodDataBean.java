@@ -27,7 +27,6 @@ public class VodDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: VodDataBean.Item
       * @描述: 影视数据列表实体
-      * @作者: Li Z
       * @日期: 2024/1/23 22:14
       * @版本: 1.0
      */

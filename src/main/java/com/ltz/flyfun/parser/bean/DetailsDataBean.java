@@ -49,7 +49,6 @@ public class DetailsDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: DetailsDataBean.Dramas
       * @描述: 播放线路列表包装类
-      * @作者: Li Z
       * @日期: 2024/1/23 22:18
       * @版本: 1.0
      */
@@ -86,7 +85,6 @@ public class DetailsDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: DetailsDataBean.DramasItem
       * @描述: 集数列表包装类
-      * @作者: Li Z
       * @日期: 2024/1/23 22:18
       * @版本: 1.0
      */
@@ -126,7 +124,6 @@ public class DetailsDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: DetailsDataBean.Recommend
       * @描述: 多季/推荐列表包装类
-      * @作者: Li Z
       * @日期: 2024/1/23 22:18
       * @版本: 1.0
      */

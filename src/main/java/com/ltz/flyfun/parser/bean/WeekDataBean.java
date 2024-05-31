@@ -33,7 +33,6 @@ public class WeekDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: WeekDataBean.WeekItem
       * @描述: 星期时间表数据 子数据实体
-      * @作者: Li Z
       * @日期: 2024/1/22 19:18
       * @版本: 1.0
      */

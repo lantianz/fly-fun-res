@@ -29,7 +29,6 @@ public class ClassificationDataBean implements Serializable {
       * @包名: com.ltz.flyfun.parser.bean
       * @类名: ClassificationDataBean.Item
       * @描述: 分类数据列表实体
-      * @作者: Li Z
       * @日期: 2024/1/23 22:16
       * @版本: 1.0
      */
