@@ -23,7 +23,6 @@ import static com.ltz.flyfun.parser.LogUtil.logInfo;
   * @包名: com.ltz.flyfun.parser.impl
   * @类名: IYingHuaImpl
   * @描述: 樱花动漫站点解析实现
-  * @作者: Li Z
   * @日期: 2024/1/23 16:39
   * @版本: 1.0
  */

@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
  * @包名: com.ltz.flyfun.parser
  * @类名: LogUtil
  * @描述: 日志类
- * @作者: Li Z
  * @日期: 2024/1/23 18:50
  * @版本: 1.0
  */

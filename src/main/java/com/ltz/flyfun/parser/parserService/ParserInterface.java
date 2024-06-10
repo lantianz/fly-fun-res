@@ -12,7 +12,6 @@ import java.util.Map;
   * @包名: com.ltz.flyfun.parser.parserService
   * @类名: ParserInterface
   * @描述: 站点数据解析接口
-  * @作者: Li Z
   * @日期: 2024/1/26 13:38
   * @版本: 1.0
  */

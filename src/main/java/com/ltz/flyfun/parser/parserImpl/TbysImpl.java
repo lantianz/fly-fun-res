@@ -27,7 +27,6 @@ import static com.ltz.flyfun.parser.LogUtil.logInfo;
   * @包名: com.ltz.flyfun.parser.impl
   * @类名: TbysImpl
   * @描述: 拖布影视站点解析实现
-  * @作者: Li Z
   * @日期: 2024/1/23 16:39
   * @版本: 1.0
  */
@@ -175,7 +174,16 @@ public class TbysImpl implements ParserInterface {
         try {
             Document document = Jsoup.parse(source);
             List<MainDataBean> mainDataBeans = new ArrayList<>();
-            // 该源没有头部TAG列表
+            // 头部TAG列表
+            MainDataBean tagBean = new MainDataBean();
+            tagBean.setDataType(MainDataBean.TAG_LIST);
+            List<MainDataBean.Tag> tags = new ArrayList<>();
+            tags.add(new MainDataBean.Tag(TbysImpl.HomeTagEnum.DY.name, TbysImpl.HomeTagEnum.DY.content));
+            tags.add(new MainDataBean.Tag(TbysImpl.HomeTagEnum.LXJ.name, TbysImpl.HomeTagEnum.LXJ.content));
+            tags.add(new MainDataBean.Tag(TbysImpl.HomeTagEnum.ZY.name, TbysImpl.HomeTagEnum.ZY.content));
+            tags.add(new MainDataBean.Tag(TbysImpl.HomeTagEnum.DH.name, TbysImpl.HomeTagEnum.DH.content));
+            tagBean.setTags(tags);
+            mainDataBeans.add(tagBean);
             /*************************** 解析banner内容开始 ***************************/
             Elements bannerList = document.select(".swiper-wrapper > .swiper-slide");
             List<MainDataBean.Item> bannerItems = new ArrayList<>();
@@ -370,6 +378,25 @@ public class TbysImpl implements ParserInterface {
 
     @Override
     public List<DetailsDataBean.Dramas> parserSourcesDramas(String source, int listSource, String dramaStr) {
+        try {
+            Document document = Jsoup.parse(source);
+            List<DetailsDataBean.Dramas> dramasList = new ArrayList<>();
+            List<DetailsDataBean.DramasItem> dramasItemList = new ArrayList<>();
+            Elements playTitleList = document.select(".play-list-box .tabs ul li");
+            if (playTitleList.size() > 0) {
+                String dataTab = playTitleList.get(listSource).attr("data-tab");
+                Elements playList = document.getElementsByAttributeValue("data-tab", dataTab).select("a");
+                parserDramas(dramasItemList, playList);
+                DetailsDataBean.Dramas dramas = new DetailsDataBean.Dramas();
+                dramas.setDramasItemList(dramasItemList);
+                dramasList.add(dramas);
+            }
+            logInfo("播放列表信息", dramasList.toString());
+            return dramasList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logInfo("parserNowSourcesDramas error", e.getMessage());
+        }
         return null;
     }
 
@@ -754,6 +781,21 @@ public class TbysImpl implements ParserInterface {
      * 获取分页正则
      */
     private static final Pattern PAGE_PATTERN = Pattern.compile("当前:\\d+/(\\d+)页");
+
+    /**
+     * 首页TAG枚举
+     */
+    @Getter
+    @AllArgsConstructor
+    private enum HomeTagEnum {
+        DY("电影", "1"),
+        LXJ("连续剧", "2"),
+        ZY("综艺", "3"),
+        DH("动画", "4");
+
+        private String name;
+        private String content;
+    }
 
     /**
      * 站点分类IDS数组,根据网站源码写死

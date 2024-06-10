@@ -7,6 +7,7 @@ import com.ltz.flyfun.parser.bean.VodDataBean;
 import com.ltz.flyfun.vo.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
@@ -22,11 +23,18 @@ public class ClassificationVodListController {
     HashMap res = new HashMap();
 
     @GetMapping("/get")
-    public Result<?> get() throws UnsupportedEncodingException {
+    public Result<?> get(@RequestParam("id") String id,
+                         @RequestParam("type") String type,
+                         @RequestParam("area") String area,
+                         @RequestParam("year") String year,
+                         @RequestParam("lang") String lang,
+                         @RequestParam("latter") String latter,
+                         @RequestParam("by") String by,
+                         @RequestParam("page") String page) throws UnsupportedEncodingException {
         CountDownLatch latch = new CountDownLatch(1);
         CountDownLatch latch2 = new CountDownLatch(1);
 
-        boolean firstTimeData = true;  //初始化加载页面时true
+        boolean firstTimeData = true;
         String[] params = new String[classificationVodListModel.getParamsSize()];
         // 筛选页面参数
         /*
@@ -41,9 +49,14 @@ public class ClassificationVodListController {
           params[7] page -> 7
             */
         // 头部tag参数
-        params[0] = "1";
-        params[6] = "score";
-        params[params.length-1] = "1";
+        params[0] = id;
+        params[1] = type;
+        params[2] = area;
+        params[3] = year;
+        params[4] = lang;
+        params[5] = latter;
+        params[6] = by;
+        params[params.length - 1] = page;
 
         classificationVodListModel.getData(firstTimeData, new ClassificationVodListCallback.DataCallback() {
             @Override

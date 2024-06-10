@@ -16,7 +16,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
 
-        List<String> sourceList = Arrays.asList("https://flyfun.top:443", "http://flyfun.top:80", "http://localhost:8882", "http://111.67.201.175:8882");
+        List<String> sourceList = Arrays.asList("http://localhost:8882", "http://111.67.201.175:8882");
         // 明确列出允许的源，而不是使用 "*"
         config.setAllowedOrigins(sourceList);
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));

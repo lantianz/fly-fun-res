@@ -25,7 +25,6 @@ import static com.ltz.flyfun.parser.LogUtil.logInfo;
   * @包名: com.ltz.flyfun.parser.parserImpl
   * @类名: ZxzjImpl
   * @描述: 在线之家站点解析实现，站点布局基本与{link SourceEnum# LIBVIO}一致
-  * @作者: Li Z
   * @日期: 2024/2/1 20:04
   * @版本: 1.0
  */

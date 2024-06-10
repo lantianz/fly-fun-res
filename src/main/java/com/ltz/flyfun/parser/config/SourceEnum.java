@@ -15,7 +15,6 @@ import java.util.Map;
   * @包名: com.ltz.flyfun.parser.config
   * @类名: SourceEnum
   * @描述: 支持站点枚举类
-  * @作者: Li Z
   * @日期: 2024/1/23 18:50
   * @版本: 1.0
  */
@@ -33,17 +32,6 @@ public enum SourceEnum {
             "/index.php/vod/show%s.html",
             "",
             new ArrayList<>()),
-//    SILISILI(ParserInterfaceFactory.SOURCE_SILISILI,
-//            "嘶哩嘶哩",
-//            "[动漫]",
-//            "",
-//            "silisili",
-//            "https://www.silisili.link",
-//            "https://weibass.github.io",
-//            "/vodsearch/?wd=%s&page=%s",
-//            "/vodsearch%spage/%s",
-//            "/static/player/AB/api.php?act=dm&m=get&id=%s%s", // 弹幕参数 视频标题、集数下标
-//            Arrays.asList(VideoModel.class.getName(), DownloadVideoModel.class.getName())), // 该站点获取播放地址需要使用POST请求
     I_YINGHUA(ParserInterfaceFactory.SOURCE_IYINGHUA,
             "樱花动漫",
             "[动漫]",
@@ -89,18 +77,6 @@ public enum SourceEnum {
             "/vodshow/%s--------%s---.html", // 暂不实现
             "",
             new ArrayList<>()),
-    FIVEMOVIE(
-            ParserInterfaceFactory.SOURCE_FIVEMOVIE,
-            "555电影",
-            "[影视]",
-            "",
-            "fiveMovie",
-            "https://5look.site",
-            "https://555app.vip",
-            "/vodsearch/%s----------%s---.html",
-            "/vodshow/%s-%s-%s-%s-%s----%s---%s.html",
-            "",
-            new ArrayList<>())
     ;
 
     /**

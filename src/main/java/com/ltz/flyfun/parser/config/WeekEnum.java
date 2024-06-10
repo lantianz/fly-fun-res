@@ -7,7 +7,6 @@ import lombok.Getter;
   * @包名: com.ltz.flyfun.parser.config
   * @类名: WeekEnum
   * @描述: 星期枚举类
-  * @作者: Li Z
   * @日期: 2024/1/22 19:16
   * @版本: 1.0
  */

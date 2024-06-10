@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
  * @包名: com.ltz.flyfun.parser.parserImpl
  * @类名: AnFunsImpl
  * @描述: AnFuns站点解析实现
- * @作者: Li Z
  * @日期: 2024/1/26 13:37
  * @版本: 1.0
  */
@@ -201,12 +200,10 @@ public class AnFunsImpl implements ParserInterface {
             mainDataBean = new MainDataBean();
             mainDataBean.setDataType(MainDataBean.TAG_LIST);
             List<MainDataBean.Tag> tags = new ArrayList<>();
-            tags.add(new MainDataBean.Tag(HomeTagEnum.WEEK.name, HomeTagEnum.WEEK.content));
             tags.add(new MainDataBean.Tag(HomeTagEnum.XFJF.name, HomeTagEnum.XFJF.content));
             tags.add(new MainDataBean.Tag(HomeTagEnum.LGWX.name, HomeTagEnum.LGWX.content));
             tags.add(new MainDataBean.Tag(HomeTagEnum.DMZT.name, HomeTagEnum.DMZT.content));
             tags.add(new MainDataBean.Tag(HomeTagEnum.OMDM.name, HomeTagEnum.OMDM.content));
-            tags.add(new MainDataBean.Tag(HomeTagEnum.ZJGX.name, HomeTagEnum.ZJGX.content));
             mainDataBean.setTags(tags);
             mainDataBeans.add(mainDataBean);
             // 轮播
@@ -242,8 +239,8 @@ public class AnFunsImpl implements ParserInterface {
                             String moreUrl = moreA.attr("href");
                             mainDataBean.setHasMore(true);
                             if (moreUrl.contains("/map")) {
-//                                mainDataBean.setOpenMoreClass(TextListActivity.class);
-                                mainDataBean.setMore("%s" + moreUrl);
+                                mainDataBean.setHasMore(false);
+//                                mainDataBean.setMore("%s" + moreUrl);
                             } else if (moreUrl.contains("/type/")) {
                                 String regex = "([0-9]+)";
                                 Pattern pattern = Pattern.compile(regex);
@@ -904,12 +901,10 @@ public class AnFunsImpl implements ParserInterface {
     @Getter
     @AllArgsConstructor
     public enum HomeTagEnum {
-        WEEK("番剧时间表", "%s"),
         XFJF("新番旧番", "1"),
         LGWX("蓝光无修", "2"),
         DMZT("动漫剧场", "3"),
-        OMDM("欧美动漫", "4"),
-        ZJGX("最近更新", "%s/map.html");
+        OMDM("欧美动漫", "4");
 
         private String name;
         private String content;
