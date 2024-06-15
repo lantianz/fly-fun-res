@@ -12,8 +12,7 @@ import com.ltz.flyfun.parser.parserService.ParserInterface;
  */
 public class ParserInterfaceFactory {
     // 当前使用的默认的源
-    public static int USER_SOURSE = 0;
-
+    public static int USER_SOURCE = 0;
     public static final int SOURCE_ANFUNS = 0;  // AnFuns动漫
     public static final int SOURCE_TBYS = 1;    // 拖布影视
     public static final int SOURCE_IYINGHUA = 2;    // 樱花动漫
@@ -21,9 +20,10 @@ public class ParserInterfaceFactory {
     public static final int SOURCE_ZXZJ = 4;    // 在线之家
     private static volatile ParserInterface parserInterface;
 
+
     public static ParserInterface getParserInterface() {
         if (parserInterface == null) {
-            switch (USER_SOURSE) {
+            switch (USER_SOURCE) {
                 case SOURCE_TBYS:
                     parserInterface = new TbysImpl();
                     break;

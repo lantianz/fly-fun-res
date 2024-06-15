@@ -24,7 +24,7 @@ public class WeekController {
     public Result<?> get() {
         CountDownLatch latch = new CountDownLatch(1);
 
-        String url = SourceEnum.getDomainUrlBySource(ParserInterfaceFactory.USER_SOURSE);
+        String url = SourceEnum.getDomainUrlBySource(ParserInterfaceFactory.USER_SOURCE);
 
         weekModel.getWeekData(url, new WeekCallback.DataCallback() {
 

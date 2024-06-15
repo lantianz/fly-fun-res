@@ -1,5 +1,6 @@
-package com.ltz.flyfun;
+package com.ltz.flyfun.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -12,11 +13,13 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
+    @Value("#{'${info.user.cors.source}'.split(',')}")
+    List<String> sourceList;
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
 
-        List<String> sourceList = Arrays.asList("http://localhost:8882", "http://111.67.201.175:8882");
         // 明确列出允许的源，而不是使用 "*"
         config.setAllowedOrigins(sourceList);
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
